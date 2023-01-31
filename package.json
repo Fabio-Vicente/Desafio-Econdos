@@ -1,0 +1,27 @@
+{
+  "name": "desafio-econdos",
+  "version": "1.0.0",
+  "description": "Desafio técnico realizado para a empresa eCondos Sistemas",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Fabio-Vicente/Desafio-Econdos.git"
+  },
+  "keywords": [
+    "eCondos",
+    "full-stack",
+    "mongodb"
+  ],
+  "author": "Fábio Vicente",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Fabio-Vicente/Desafio-Econdos/issues"
+  },
+  "homepage": "https://github.com/Fabio-Vicente/Desafio-Econdos#readme"
+}
