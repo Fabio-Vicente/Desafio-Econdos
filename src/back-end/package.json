@@ -1,0 +1,25 @@
+{
+  "name": "desafio-econdos-backend",
+  "version": "1.0.0",
+  "description": "Desafio técnico realizado para a empresa eCondos Sistemas - Backend",
+  "main": "index.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Fabio-Vicente/Desafio-Econdos.git"
+  },
+  "keywords": [
+    "eCondos",
+    "back-end",
+    "mongodb"
+  ],
+  "author": "Fábio Vicente",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Fabio-Vicente/Desafio-Econdos/issues"
+  },
+  "homepage": "https://github.com/Fabio-Vicente/Desafio-Econdos#readme"
+}

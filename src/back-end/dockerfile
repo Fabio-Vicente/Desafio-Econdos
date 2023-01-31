@@ -1,0 +1,10 @@
+FROM node:18.13.0
+
+EXPOSE 3001
+
+WORKDIR /backend
+
+COPY . .
+RUN npm install --production
+
+ENTRYPOINT [ "npm", "start" ]
