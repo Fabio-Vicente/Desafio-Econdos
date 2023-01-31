@@ -1,0 +1,22 @@
+name: Continuos Integration
+
+on:
+  pull_request:
+    types: [opened, synchronize]
+  workflow_call:
+    
+
+jobs:
+  Lint:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v3
+      - name: Lint sources
+        run: npm run lint
+  
+  Tests:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v3
+      - name: Test application
+        run: npm test
