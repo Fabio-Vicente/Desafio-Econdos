@@ -1,0 +1,61 @@
+version: '3.9'
+
+services:
+  frontend:
+    container_name: front-end
+    build: ./src/front-end
+    ports:
+      - 3000:3000
+    restart: on-failure
+    networks:
+      - frontend
+    healthcheck:
+      test: ["CMD", "lsof", "-t", "-i:3000"]
+      interval: 1m30s
+      timeout: 30s
+      retries: 5
+      start_period: 30s
+    depends_on:
+      backend:
+        condition: service_healthy
+        
+
+  backend:
+    container_name: back-end
+    build: ./src/back-end
+    ports:
+      - 3001:3001
+    restart: on-failure
+    networks:
+      - frontend
+      - backend
+    healthcheck:
+      test: ["CMD", "lsof", "-t", "-i:3001"]
+      interval: 1m30s
+      timeout: 30s
+      retries: 5
+      start_period: 30s
+    depends_on:
+      database:
+        condition: service_healthy
+  
+  database:
+    container_name: database
+    image: mongo:6.0.4
+    ports:
+      - 27017:27017
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${ECONDOS_MONGODB_USER}
+      MONGO_INITDB_ROOT_PASSWORD: ${ECONDOS_MONGODB_PASSWORD}
+    networks:
+      - backend
+    healthcheck:
+      test: ["CMD", "mongosh", "--eval", "db.runCommand({ ping: 1 })", "--quiet"]
+      interval: 1m30s
+      timeout: 30s
+      retries: 5
+      start_period: 30s
+
+networks:
+  frontend:
+  backend:
