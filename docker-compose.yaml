@@ -23,6 +23,8 @@ services:
   backend:
     container_name: back-end
     build: ./src/back-end
+    environment:
+      - BACKEND_PORT=3001
     ports:
       - 3001:3001
     restart: on-failure
