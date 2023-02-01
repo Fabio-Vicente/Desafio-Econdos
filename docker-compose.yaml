@@ -45,8 +45,8 @@ services:
     ports:
       - 27017:27017
     environment:
-      MONGO_INITDB_ROOT_USERNAME: ${ECONDOS_MONGODB_USER}
-      MONGO_INITDB_ROOT_PASSWORD: ${ECONDOS_MONGODB_PASSWORD}
+      MONGO_INITDB_ROOT_USERNAME: ${MONGOUSER}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGOPASSWORD}
     networks:
       - backend
     healthcheck:
