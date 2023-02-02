@@ -12,7 +12,7 @@
     "start:front": "npm start -w src/front-end",
     "start:back": "npm start -w src/back-end",
     "start": "npm start:back && npm start:front",
-    "lint": "./node_modules/.bin/eslint ./src/**/*",
+    "lint": "./node_modules/.bin/eslint ./src/*",
     "test": "echo \"Error: no test specified\" && exit 0"
   },
   "repository": {
