@@ -21,4 +21,4 @@ jobs:
           type: now
           target_branch: main
           github_token: ${{ github.token }}
-          message: ${{ github }}
+          message: ${{ github.sha }}
