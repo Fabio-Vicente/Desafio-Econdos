@@ -1,0 +1,52 @@
+{
+  "name": "desafio-econdos",
+  "version": "1.0.0",
+  "description": "Desafio técnico realizado para a empresa eCondos Sistemas",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "compose:up": "docker-compose up -d",
+    "compose:down": "docker-compose down",
+    "start:front": "npm start -w src/front-end",
+    "start:back": "npm start -w src/back-end",
+    "start": "npm start:back && npm start:front",
+    "lint": "./node_modules/.bin/eslint ./src/*",
+    "test": "echo \"Error: no test specified\" && exit 0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Fabio-Vicente/Desafio-Econdos.git"
+  },
+  "keywords": [
+    "eCondos",
+    "full-stack",
+    "mongodb"
+  ],
+  "author": "Fábio Vicente",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Fabio-Vicente/Desafio-Econdos/issues"
+  },
+  "homepage": "https://github.com/Fabio-Vicente/Desafio-Econdos#readme",
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.50.0",
+    "@typescript-eslint/parser": "^5.50.0",
+    "eslint": "^8.33.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-airbnb-typescript": "^17.0.0",
+    "eslint-config-standard-with-typescript": "^33.0.0",
+    "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-jsx-a11y": "^6.7.1",
+    "eslint-plugin-n": "^15.6.1",
+    "eslint-plugin-promise": "^6.1.1",
+    "eslint-plugin-react": "^7.32.2",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "typescript": "^4.9.5"
+  },
+  "workspaces": [
+    "src/back-end",
+    "src/front-end"
+  ]
+}
