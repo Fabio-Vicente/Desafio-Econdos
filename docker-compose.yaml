@@ -10,7 +10,7 @@ services:
     networks:
       - frontend
     healthcheck:
-      test: ["CMD", "lsof", "-t", "-i:3000"]
+      test: ["CMD", "curl", "localhost:3000"]
       interval: 2s
       timeout: 5s
       retries: 5
