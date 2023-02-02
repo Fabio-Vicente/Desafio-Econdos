@@ -7,7 +7,7 @@ on:
 
 jobs:
   CI:
-    uses: .github/workflows/ci.yaml
+    uses: .github/workflows/ci.yaml@staging
   
   Deploy:
     needs: CI
