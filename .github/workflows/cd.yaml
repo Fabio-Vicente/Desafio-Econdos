@@ -1,0 +1,24 @@
+name: Continous Deployment
+
+on:
+  push:
+    branches: [staging]
+
+
+jobs:
+  CI:
+    uses: ./.github/workflows/ci.yaml
+  
+  Deploy:
+    needs: CI
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Deploy
+        uses: devmasx/merge-branch@master
+        with:
+          type: now
+          target_branch: main
+          github_token: ${{ github.token }}
+          message: ${{ github.sha }}

@@ -1,0 +1,24 @@
+FROM node:18.13.0 AS build
+LABEL stage="build"
+# source: https://stackoverflow.com/questions/50126741/how-to-remove-intermediate-images-from-a-build-after-the-build in 02/01/2023
+
+WORKDIR /backend-dev
+
+COPY . .
+RUN npm install
+RUN npm run build
+
+FROM node:18.13.0
+
+EXPOSE 3001
+
+WORKDIR /backend
+
+ENV BACKEND_PORT=3001
+
+COPY --from=build /backend-dev/dist/ .
+COPY --from=build /backend-dev/package.json .
+COPY --from=build /backend-dev/package-lock.json .
+RUN npm install --omit=dev
+
+ENTRYPOINT [ "node", "server.js" ]
