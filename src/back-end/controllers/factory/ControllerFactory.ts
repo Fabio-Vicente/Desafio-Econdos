@@ -16,7 +16,7 @@ export default abstract class ControllerFactory<T> implements IController<T> {
     const readResponse = await this._entityService.ReadOneInstance(id);
 
     if ((readResponse as IError).code === Error.catalog.NOT_FOUND) {
-      next(StatusCodes.NOT_FOUND);
+      next(new Error(StatusCodes.NOT_FOUND));
       return;
     }
 
@@ -31,7 +31,7 @@ export default abstract class ControllerFactory<T> implements IController<T> {
     const updateResponse = await this._entityService.UpdateInstance(req.body);
 
     if ((updateResponse as IError).code === Error.catalog.NOT_FOUND) {
-      next(StatusCodes.NOT_FOUND);
+      next(new Error(StatusCodes.NOT_FOUND));
       return;
     }
 
@@ -42,7 +42,7 @@ export default abstract class ControllerFactory<T> implements IController<T> {
     const deletResponse = await this._entityService.DeleteInstance(req.body);
 
     if ((deletResponse as IError).code === Error.catalog.NOT_FOUND) {
-      next(StatusCodes.NOT_FOUND);
+      next(new Error(StatusCodes.NOT_FOUND));
       return;
     }
 
