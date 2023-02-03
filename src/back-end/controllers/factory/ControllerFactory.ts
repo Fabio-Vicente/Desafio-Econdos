@@ -1,10 +1,15 @@
 import { type NextFunction, type Request, type Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
 import Error from '../../error';
-import { type IError, type IController, type IEntityService } from '../../interfaces';
+import {
+  type IError, type IController, type IEntityService, type IValidateMiddleware,
+} from '../../interfaces';
 
 export default abstract class ControllerFactory<T> implements IController<T> {
-  constructor(protected readonly _entityService: IEntityService<T>) {}
+  constructor(
+    protected readonly _entityService: IEntityService<T>,
+    protected readonly _validationMiddleware?: IValidateMiddleware<T>,
+  ) {}
 
   async ReadAll(_req: Request, res: Response): Promise<void> {
     res.status(StatusCodes.OK).json(await this._entityService.ReadAllInstances());
