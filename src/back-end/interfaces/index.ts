@@ -1,5 +1,4 @@
 import type IApp from './IApp';
+import type IRepository from './IRepository';
 
-export default IApp;
-
-export { type IApp };
+export { type IApp, type IRepository };
