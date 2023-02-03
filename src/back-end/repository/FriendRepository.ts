@@ -1,4 +1,3 @@
-/* eslint-disable no-underscore-dangle */
 import mongoose, { Schema, type Model } from 'mongoose';
 import type { IFriend } from '../interfaces/core';
 import MongoDBFactory from './factory/MongoDBFactory';

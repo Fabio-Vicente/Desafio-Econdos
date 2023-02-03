@@ -1,4 +1,3 @@
-/* eslint-disable no-underscore-dangle */
 import mongoose, { type Model } from 'mongoose';
 import { type IRepository } from '../../interfaces';
 

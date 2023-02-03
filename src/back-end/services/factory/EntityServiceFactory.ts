@@ -1,4 +1,3 @@
-/* eslint-disable no-underscore-dangle */
 import type mongoose from 'mongoose';
 import Error from '../../error';
 import { type IRepository, type IEntityService, type IError } from '../../interfaces';
