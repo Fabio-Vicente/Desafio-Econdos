@@ -1,6 +1,8 @@
 import express, { type Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
 import { type IApp } from './interfaces';
+import AppRouter from './router';
+import { friendsRoutes } from './routes';
 
 class App implements IApp {
   app: express.Express = express();
@@ -13,6 +15,7 @@ class App implements IApp {
 
   config(): void {
     this.app.use(express.json());
+    this.app.use(new AppRouter([friendsRoutes]).router);
   }
 
   start(port: number): void {
