@@ -1,3 +1,7 @@
-import Error from './Error';
+import HTTPError from './HTTPError';
+import ErrorCatalog from './ErrorCatalog';
 
-export default Error;
+export {
+  HTTPError,
+  ErrorCatalog,
+};

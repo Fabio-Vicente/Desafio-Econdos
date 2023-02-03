@@ -1,6 +1,6 @@
 import type mongoose from 'mongoose';
-import Error from '../../error';
-import { type IRepository, type IEntityService, type IError } from '../../interfaces';
+import { ErrorCatalog } from '../../error';
+import { type IRepository, type IEntityService } from '../../interfaces';
 
 type ObjectId = mongoose.Types.ObjectId;
 
@@ -11,11 +11,11 @@ export default class EntityServiceFactory<T> implements IEntityService<T> {
     return this._repository.GetAll();
   }
 
-  async ReadOneInstance(id: string | ObjectId): Promise<T | IError> {
+  async ReadOneInstance(id: string | ObjectId): Promise<T | ErrorCatalog> {
     const repositoryResponse = await this._repository.Get(id);
 
     if (repositoryResponse === null) {
-      return new Error(Error.catalog.NOT_FOUND);
+      return ErrorCatalog.NOT_FOUND;
     }
 
     return repositoryResponse;
@@ -25,21 +25,21 @@ export default class EntityServiceFactory<T> implements IEntityService<T> {
     return this._repository.Create(newInstance);
   }
 
-  async UpdateInstance(changedInstance: T): Promise<T | IError> {
+  async UpdateInstance(changedInstance: T): Promise<T | ErrorCatalog> {
     const repositoryResponse = await this._repository.Update(changedInstance);
 
     if (repositoryResponse === null) {
-      return new Error(Error.catalog.NOT_FOUND);
+      return ErrorCatalog.NOT_FOUND;
     }
 
     return changedInstance;
   }
 
-  async DeleteInstance(changedInstance: T): Promise<T | IError> {
+  async DeleteInstance(changedInstance: T): Promise<T | ErrorCatalog> {
     const repositoryResponse = await this._repository.Delete(changedInstance);
 
     if (repositoryResponse === null) {
-      return new Error(Error.catalog.NOT_FOUND);
+      return ErrorCatalog.NOT_FOUND;
     }
 
     return changedInstance;

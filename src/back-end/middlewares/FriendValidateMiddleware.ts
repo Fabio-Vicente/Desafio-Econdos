@@ -5,7 +5,7 @@ import { isValidObjectId } from 'mongoose';
 import ValidateMiddlewareFactory from './factory/ValidateMiddlewareFactory';
 import { type IFriend } from '../interfaces/core';
 import { friendSchema } from '../schemas';
-import Error from '../error';
+import { HTTPError } from '../error';
 
 export default class FriendValidateMiddleware extends ValidateMiddlewareFactory<IFriend> {
   constructor(readonly schema: Schema = friendSchema) {
@@ -17,7 +17,7 @@ export default class FriendValidateMiddleware extends ValidateMiddlewareFactory<
 
     const validateId = isValidObjectId(id);
     if (!validateId) {
-      next(new Error(StatusCodes.BAD_REQUEST, 'Invalid id'));
+      next(new HTTPError(StatusCodes.BAD_REQUEST, 'Invalid id'));
       return;
     }
 

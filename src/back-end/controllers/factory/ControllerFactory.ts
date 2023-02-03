@@ -1,9 +1,7 @@
 import { type NextFunction, type Request, type Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
-import Error from '../../error';
-import {
-  type IError, type IController, type IEntityService, type IValidateMiddleware,
-} from '../../interfaces';
+import { HTTPError, ErrorCatalog } from '../../error';
+import { type IController, type IEntityService, type IValidateMiddleware } from '../../interfaces';
 
 export default abstract class ControllerFactory<T> implements IController<T> {
   constructor(
@@ -26,8 +24,8 @@ export default abstract class ControllerFactory<T> implements IController<T> {
 
     const readResponse = await this._entityService.ReadOneInstance(id);
 
-    if ((readResponse as IError).code === Error.catalog.NOT_FOUND) {
-      next(new Error(StatusCodes.NOT_FOUND));
+    if ((readResponse as ErrorCatalog) === ErrorCatalog.NOT_FOUND) {
+      next(new HTTPError(StatusCodes.NOT_FOUND, readResponse as ErrorCatalog));
       return;
     }
 
@@ -41,8 +39,8 @@ export default abstract class ControllerFactory<T> implements IController<T> {
   async Update(req: Request<T>, res: Response<T>, next: NextFunction): Promise<void> {
     const updateResponse = await this._entityService.UpdateInstance(req.body);
 
-    if ((updateResponse as IError).code === Error.catalog.NOT_FOUND) {
-      next(new Error(StatusCodes.NOT_FOUND));
+    if ((updateResponse as ErrorCatalog) === ErrorCatalog.NOT_FOUND) {
+      next(new HTTPError(StatusCodes.NOT_FOUND, updateResponse as ErrorCatalog));
       return;
     }
 
@@ -52,8 +50,8 @@ export default abstract class ControllerFactory<T> implements IController<T> {
   async Delete(req: Request<T>, res: Response<T>, next: NextFunction): Promise<void> {
     const deletResponse = await this._entityService.DeleteInstance(req.body);
 
-    if ((deletResponse as IError).code === Error.catalog.NOT_FOUND) {
-      next(new Error(StatusCodes.NOT_FOUND));
+    if ((deletResponse as ErrorCatalog) === ErrorCatalog.NOT_FOUND) {
+      next(new HTTPError(StatusCodes.NOT_FOUND, deletResponse as ErrorCatalog));
       return;
     }
 
