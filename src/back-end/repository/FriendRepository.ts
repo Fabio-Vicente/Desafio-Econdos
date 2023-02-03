@@ -6,7 +6,7 @@ import MongoDBFactory from './factory/MongoDBFactory';
 const schema = new Schema<IFriend>();
 
 export default class FriendRepository extends MongoDBFactory<IFriend> {
-  constructor(model: Model<IFriend> = mongoose.model('Friends', schema)) {
+  constructor(readonly model: Model<IFriend> = mongoose.model('Friends', schema)) {
     super(model);
   }
 }

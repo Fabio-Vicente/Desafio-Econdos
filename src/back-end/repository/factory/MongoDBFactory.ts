@@ -6,7 +6,7 @@ type ObjectId = mongoose.Types.ObjectId;
 
 export default abstract class
 MongoDBFactory<T extends { _id: ObjectId | string }> implements IRepository<T> {
-  constructor(protected model: Model<T>) {}
+  constructor(protected readonly model: Model<T>) {}
 
   async Get(id: ObjectId | string): Promise<T | null> {
     return this.model.findOne(new mongoose.Types.ObjectId(id));

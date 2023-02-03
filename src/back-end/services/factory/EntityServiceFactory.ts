@@ -6,7 +6,7 @@ import { type IRepository, type IEntityService, type IError } from '../../interf
 type ObjectId = mongoose.Types.ObjectId;
 
 export default class EntityServiceFactory<T> implements IEntityService<T> {
-  constructor(protected _repository: IRepository<T>) {}
+  constructor(protected readonly _repository: IRepository<T>) {}
 
   async ReadAllInstances(): Promise<T[]> {
     return this._repository.GetAll();
