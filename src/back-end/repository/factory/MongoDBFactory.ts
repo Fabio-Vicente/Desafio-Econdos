@@ -1,13 +1,15 @@
 /* eslint-disable no-underscore-dangle */
-import { type Model, type ObjectId } from 'mongoose';
+import mongoose, { type Model } from 'mongoose';
 import { type IRepository } from '../../interfaces';
+
+type ObjectId = mongoose.Types.ObjectId;
 
 export default abstract class
 MongoDBFactory<T extends { _id: ObjectId | string }> implements IRepository<T> {
   constructor(protected model: Model<T>) {}
 
-  async Get(id: ObjectId): Promise<T | null> {
-    return this.model.findOne(id);
+  async Get(id: ObjectId | string): Promise<T | null> {
+    return this.model.findOne(new mongoose.Types.ObjectId(id));
   }
 
   async GetAll(): Promise<T[]> {
