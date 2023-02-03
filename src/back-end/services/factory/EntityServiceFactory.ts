@@ -1,7 +1,9 @@
 /* eslint-disable no-underscore-dangle */
-import { type ObjectId } from 'mongoose';
+import type mongoose from 'mongoose';
 import Error from '../../error';
 import { type IRepository, type IEntityService, type IError } from '../../interfaces';
+
+type ObjectId = mongoose.Types.ObjectId;
 
 export default class EntityServiceFactory<T> implements IEntityService<T> {
   constructor(protected _repository: IRepository<T>) {}

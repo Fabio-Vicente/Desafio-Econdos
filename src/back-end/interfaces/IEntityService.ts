@@ -1,5 +1,7 @@
-import { type ObjectId } from 'mongoose';
+import type mongoose from 'mongoose';
 import type IError from './IError';
+
+type ObjectId = mongoose.Types.ObjectId;
 
 export default interface IEntityService<T> {
   ReadAllInstances: () => Promise<T[]>

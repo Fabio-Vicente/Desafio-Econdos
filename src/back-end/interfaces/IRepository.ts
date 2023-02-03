@@ -1,4 +1,6 @@
-import { type ObjectId } from 'mongoose';
+import type mongoose from 'mongoose';
+
+type ObjectId = mongoose.Types.ObjectId;
 
 export default interface IRepository<T> {
   Get: (id: ObjectId | string) => Promise<T | null>
