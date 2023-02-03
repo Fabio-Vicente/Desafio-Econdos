@@ -9,7 +9,13 @@ export default abstract class ControllerFactory<T> implements IController<T> {
   constructor(
     protected readonly _entityService: IEntityService<T>,
     protected readonly _validationMiddleware?: IValidateMiddleware<T>,
-  ) {}
+  ) {
+    this.ReadAll = this.ReadAll.bind(this);
+    this.ReadOne = this.ReadOne.bind(this);
+    this.Create = this.Create.bind(this);
+    this.Update = this.Update.bind(this);
+    this.Delete = this.Delete.bind(this);
+  }
 
   async ReadAll(_req: Request, res: Response): Promise<void> {
     res.status(StatusCodes.OK).json(await this._entityService.ReadAllInstances());
