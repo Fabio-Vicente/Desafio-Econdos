@@ -60,6 +60,9 @@
     "src/front-end"
   ],
   "dependencies": {
-    "desafio-econdos-backend": "file:src/back-end"
+    "desafio-econdos-backend": "file:src/back-end",
+    "http-status-codes": "^2.2.0",
+    "mongodb": "^5.0.0",
+    "mongoose": "^6.9.0"
   }
 }
