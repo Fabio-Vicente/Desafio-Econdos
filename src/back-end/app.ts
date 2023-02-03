@@ -1,6 +1,7 @@
 import express, { type Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
 import { type IApp } from './interfaces';
+import ErrorMiddleware from './middlewares/ErrorMiddleware';
 import AppRouter from './router';
 import { friendsRoutes } from './routes';
 
@@ -16,6 +17,7 @@ class App implements IApp {
   config(): void {
     this.app.use(express.json());
     this.app.use(new AppRouter([friendsRoutes]).router);
+    this.app.use(ErrorMiddleware);
   }
 
   start(port: number): void {
