@@ -22,10 +22,10 @@ services:
   backend:
     container_name: back-end
     build: ./src/back-end
-    environment:
-      - BACKEND_PORT=3001
     ports:
       - 3001:3001
+    env_file:
+      - ./src/back-end/.env
     restart: on-failure
     networks:
       - frontend
@@ -44,9 +44,8 @@ services:
     image: mongo:6.0.4
     ports:
       - 27017:27017
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: ${MONGOUSER}
-      MONGO_INITDB_ROOT_PASSWORD: ${MONGOPASSWORD}
+    env_file:
+      - ./src/back-end/.env
     networks:
       - backend
     healthcheck:
