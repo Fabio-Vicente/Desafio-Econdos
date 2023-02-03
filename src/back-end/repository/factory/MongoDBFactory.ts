@@ -3,7 +3,7 @@ import { type Model, type ObjectId } from 'mongoose';
 import { type IRepository } from '../../interfaces';
 
 export default abstract class
-MongoDBFactory<T extends { _id: ObjectId }> implements IRepository<T> {
+MongoDBFactory<T extends { _id: ObjectId | string }> implements IRepository<T> {
   constructor(protected model: Model<T>) {}
 
   async Get(id: ObjectId): Promise<T | null> {
