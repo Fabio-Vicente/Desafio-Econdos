@@ -11,7 +11,6 @@ friendRoutes.route('/friends')
   .get(friendsController.ReadAll)
   .post(friendsController.validationFriendMiddleware.validateContent, friendsController.Create)
   .put(
-    FriendValidateMiddleware.validateId as RequestListener,
     friendsController.validationFriendMiddleware.validateContent,
     friendsController.Update,
   )
