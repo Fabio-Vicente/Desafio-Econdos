@@ -11,7 +11,7 @@
     "compose:down": "docker-compose down",
     "start:front": "npm start -w src/front-end",
     "start:back": "npm start -w src/back-end",
-    "start": "npm start:back && npm start:front",
+    "start": "npm run start:back && npm run start:front",
     "lint": "./node_modules/.bin/eslint ./src/*",
     "test": "ts-mocha tests/**/*.spec.ts"
   },
