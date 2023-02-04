@@ -117,15 +117,15 @@ describe('Verifica se a aplicação responde como esperado quando:', () => {
   });
 
   context('É requisitado a criação de um amigo (Create)', () => {
-    let getStub: SinonStub;
+    let createStube: SinonStub;
 
     before(async () => {
-      getStub = stub(Model, 'create').resolves(createdFriend);
+      createStube = stub(Model, 'create').resolves(createdFriend);
       response = await chai.request(app).post('/friends').send(newFriend);
     });
 
     after(() => {
-      getStub.restore();
+      createStube.restore();
     });
 
     it('com o status code 201 - CREATED:', () => {
@@ -159,15 +159,15 @@ describe('Verifica se a aplicação responde como esperado quando:', () => {
   });
 
   context('É requisitado a atualização de um amigo (Update)', () => {
-    let getStub: SinonStub;
+    let updateStub: SinonStub;
 
     before(async () => {
-      getStub = stub(Model, 'updateOne').resolves(updateResponse as UpdateWriteOpResult);
+      updateStub = stub(Model, 'updateOne').resolves(updateResponse as UpdateWriteOpResult);
       response = await chai.request(app).put('/friends').send(updatedFriend);
     });
 
     after(() => {
-      getStub.restore();
+      updateStub.restore();
     });
 
     it('com o status code 200 - OK:', () => {
@@ -180,15 +180,15 @@ describe('Verifica se a aplicação responde como esperado quando:', () => {
   });
 
   context('É requisitado a atualização de um amigo inexistente (Update)', () => {
-    let getStub: SinonStub;
+    let updateStub: SinonStub;
 
     before(async () => {
-      getStub = stub(Model, 'updateOne').resolves(notUpdateResponse as UpdateWriteOpResult);
+      updateStub = stub(Model, 'updateOne').resolves(notUpdateResponse as UpdateWriteOpResult);
       response = await chai.request(app).put('/friends').send(inexistentFriend);
     });
 
     after(() => {
-      getStub.restore();
+      updateStub.restore();
     });
 
     it('com o status code 404 - NOT FOUND:', () => {
@@ -219,15 +219,15 @@ describe('Verifica se a aplicação responde como esperado quando:', () => {
   });
 
   context('É requisitado a remoção de um amigo (Delete)', async () => {
-    let getStub: SinonStub;
+    let deleteStub: SinonStub;
 
     before(async () => {
-      getStub = stub(Model, 'deleteOne').resolves(deleteResponse as DeleteResult);
+      deleteStub = stub(Model, 'deleteOne').resolves(deleteResponse as DeleteResult);
       response = await chai.request(app).delete('/friends').send(oneFriend);
     });
 
     after(() => {
-      getStub.restore();
+      deleteStub.restore();
     });
 
     it('com o status code 200 - OK:', () => {
@@ -240,15 +240,15 @@ describe('Verifica se a aplicação responde como esperado quando:', () => {
   });
 
   context('É requisitado a remoção de um amigo inexistente (Delete)', () => {
-    let getStub: SinonStub;
+    let deleteStub: SinonStub;
 
     before(async () => {
-      getStub = stub(Model, 'deleteOne').resolves(notDeleteResponse as DeleteResult);
+      deleteStub = stub(Model, 'deleteOne').resolves(notDeleteResponse as DeleteResult);
       response = await chai.request(app).delete('/friends').send(inexistentFriend);
     });
 
     after(() => {
-      getStub.restore();
+      deleteStub.restore();
     });
 
     it('com o status code 404 - NOT FOUND:', () => {
@@ -279,15 +279,15 @@ describe('Verifica se a aplicação responde como esperado quando:', () => {
   });
 
   context('É requisitado a remoção de todos os amigos dados do banco', () => {
-    let getStub: SinonStub;
+    let deleteStub: SinonStub;
 
     before(async () => {
-      getStub = stub(Model, 'deleteMany');
+      deleteStub = stub(Model, 'deleteMany');
       response = await chai.request(app).delete('/friends/all');
     });
 
     after(() => {
-      getStub.restore();
+      deleteStub.restore();
     });
 
     it('com o status code 204 - NO CONTENT:', () => {
