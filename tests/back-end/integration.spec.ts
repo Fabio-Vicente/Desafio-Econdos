@@ -16,6 +16,7 @@ import {
   inexistentId,
   newFriend,
   notDeleteResponse,
+  notUpdateResponse,
   oneFriend,
   searchId,
   updatedFriend,
@@ -71,7 +72,7 @@ describe('Verifica se a aplicação responde como esperado quando:', () => {
     });
   });
 
-  context('É requisitado a leitura de um único inexistente (ReadOne)', () => {
+  context('É requisitado a leitura de um amigo inexistente (ReadOne)', () => {
     let getStub: SinonStub;
 
     before(async () => {
@@ -84,7 +85,7 @@ describe('Verifica se a aplicação responde como esperado quando:', () => {
     });
 
     it('com o status code 404 - NOT FOUND:', () => {
-      expect(response.body).to.be.deep.equal(oneFriend);
+      expect(response.status).to.be.equal(StatusCodes.NOT_FOUND);
     });
   });
 
@@ -121,7 +122,7 @@ describe('Verifica se a aplicação responde como esperado quando:', () => {
       getStub.restore();
     });
 
-    it('com o status code 200 - CREATED:', () => {
+    it('com o status code 200 - OK:', () => {
       expect(response.status).to.be.equal(StatusCodes.OK);
     });
 
@@ -130,11 +131,11 @@ describe('Verifica se a aplicação responde como esperado quando:', () => {
     });
   });
 
-  context('É requisitado a atualização de um amigo (Update)', () => {
+  context('É requisitado a atualização de um amigo inexistente (Update)', () => {
     let getStub: SinonStub;
 
     before(async () => {
-      getStub = stub(Model, 'updateOne').resolves(updateResponse as UpdateWriteOpResult);
+      getStub = stub(Model, 'updateOne').resolves(notUpdateResponse as UpdateWriteOpResult);
       response = await chai.request(app).put('/friends').send(inexistentFriend);
     });
 
@@ -143,7 +144,7 @@ describe('Verifica se a aplicação responde como esperado quando:', () => {
     });
 
     it('com o status code 404 - NOT FOUND:', () => {
-      expect(response.status).to.be.equal(StatusCodes.OK);
+      expect(response.status).to.be.equal(StatusCodes.NOT_FOUND);
     });
   });
 
@@ -159,12 +160,12 @@ describe('Verifica se a aplicação responde como esperado quando:', () => {
       getStub.restore();
     });
 
-    it('com o status code 204 - NO CONTENT:', () => {
+    it('com o status code 200 - OK:', () => {
       expect(response.status).to.be.equal(StatusCodes.OK);
     });
 
     it('com o amigo removido no corpo da mensagem:', () => {
-      expect(response.body).to.be.deep.equal(updatedFriend);
+      expect(response.body).to.be.deep.equal(oneFriend);
     });
   });
 
@@ -181,7 +182,7 @@ describe('Verifica se a aplicação responde como esperado quando:', () => {
     });
 
     it('com o status code 404 - NOT FOUND:', () => {
-      expect(response.status).to.be.equal(StatusCodes.NOT_FOUND/*  */);
+      expect(response.status).to.be.equal(StatusCodes.NOT_FOUND);
     });
   });
 });
