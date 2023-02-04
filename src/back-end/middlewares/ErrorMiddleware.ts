@@ -1,10 +1,10 @@
 import { type NextFunction, type Request, type Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
 import { ZodError } from 'zod';
-import type Error from '../error';
+import { type IHTTPError } from '../interfaces';
 
 export default function ErrorMiddleware(
-  error: Error | ZodError,
+  error: IHTTPError | ZodError,
   _req: Request,
   res: Response,
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -16,6 +16,6 @@ export default function ErrorMiddleware(
   }
 
   res
-    .status(error.code ?? StatusCodes.INTERNAL_SERVER_ERROR)
+    .status(error.statusCode ?? StatusCodes.INTERNAL_SERVER_ERROR)
     .json({ error: error.message ?? 'Internal Server Error' });
 }
