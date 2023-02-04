@@ -1,6 +1,6 @@
 enum ErrorCatalog {
-  NOT_FOUND = 'Não encontrado',
-  INVALID_ID = 'ID invalido',
+  NOT_FOUND = 'Not found',
+  INVALID_ID = 'Invalid ID',
 }
 
 export default ErrorCatalog;
