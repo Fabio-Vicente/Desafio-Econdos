@@ -27,10 +27,8 @@ export const oneFriend: IFriend = {
 };
 
 export const newFriend: IFriend = {
-  _id: '',
   name: 'Milena Almeida',
   email: 'milaalmeidaaguiar@hotmail.com',
-  secretFriend: '',
 };
 
 export const createdFriend: IFriend = {
