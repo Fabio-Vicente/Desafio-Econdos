@@ -14,13 +14,23 @@ import {
   deleteResponse,
   inexistentFriend,
   inexistentId,
+  malFormedId,
   newFriend,
+  newWrongTypeEmail,
+  newWrongTypeName,
+  newWrongEmailFriend,
+  newWrongEmailFriend2,
   notDeleteResponse,
   notUpdateResponse,
   oneFriend,
   searchId,
   updatedFriend,
   updateResponse,
+  wrongEmailFriend,
+  wrongEmailFriend2,
+  wrongSecretFriend,
+  wrongTypeEmail,
+  wrongTypeName,
 } from '../stubs/friends';
 
 const { app } = new App();
@@ -89,6 +99,23 @@ describe('Verifica se a aplicação responde como esperado quando:', () => {
     });
   });
 
+  context('É requisitado a leitura de um amigo com id mal-formatado (ReadOne)', () => {
+    let getStub: SinonStub;
+
+    before(async () => {
+      getStub = stub(Model, 'findOne').resolves(null);
+      response = await chai.request(app).get(`/friends/${malFormedId}`);
+    });
+
+    after(() => {
+      getStub.restore();
+    });
+
+    it('com o status code 400 - NOT FOUND:', () => {
+      expect(response.status).to.be.equal(StatusCodes.BAD_REQUEST);
+    });
+  });
+
   context('É requisitado a criação de um amigo (Create)', () => {
     let getStub: SinonStub;
 
@@ -107,6 +134,27 @@ describe('Verifica se a aplicação responde como esperado quando:', () => {
 
     it('com o amigo criado no corpo da mensagem:', () => {
       expect(response.body).to.be.deep.equal(createdFriend);
+    });
+  });
+
+  context('É requisitado a criação de um amigo com campos incorretos(Create)', () => {
+    const wrongResponses: Response[] = [];
+
+    before(async () => {
+      [
+        newWrongEmailFriend,
+        newWrongEmailFriend2,
+        newWrongTypeName,
+        newWrongTypeEmail,
+      ].forEach(async (wrongFriend) => {
+        wrongResponses.push(await chai.request(app).post('/friends').send(wrongFriend));
+      });
+    });
+
+    it('com o status code 400 - BAD REQUEST:', () => {
+      wrongResponses.forEach((wrongResponse) => {
+        expect(wrongResponse.status).to.be.equal(StatusCodes.BAD_REQUEST);
+      });
     });
   });
 
@@ -148,6 +196,28 @@ describe('Verifica se a aplicação responde como esperado quando:', () => {
     });
   });
 
+  context('É requisitado a atualização de um amigo com campos incorretos(Update)', () => {
+    const wrongResponses: Response[] = [];
+
+    before(async () => {
+      [
+        wrongEmailFriend,
+        wrongEmailFriend2,
+        wrongTypeName,
+        wrongTypeEmail,
+        wrongSecretFriend,
+      ].forEach(async (wrongFriend) => {
+        wrongResponses.push(await chai.request(app).put('/friends').send(wrongFriend));
+      });
+    });
+
+    it('com o status code 400 - BAD REQUEST:', () => {
+      wrongResponses.forEach((wrongResponse) => {
+        expect(wrongResponse.status).to.be.equal(StatusCodes.BAD_REQUEST);
+      });
+    });
+  });
+
   context('É requisitado a remoção de um amigo (Delete)', async () => {
     let getStub: SinonStub;
 
@@ -183,6 +253,28 @@ describe('Verifica se a aplicação responde como esperado quando:', () => {
 
     it('com o status code 404 - NOT FOUND:', () => {
       expect(response.status).to.be.equal(StatusCodes.NOT_FOUND);
+    });
+  });
+
+  context('É requisitado a atualização de um amigo com campos incorretos(Delete)', () => {
+    const wrongResponses: Response[] = [];
+
+    before(async () => {
+      [
+        wrongEmailFriend,
+        wrongEmailFriend2,
+        wrongTypeName,
+        wrongTypeEmail,
+        wrongSecretFriend,
+      ].forEach(async (wrongFriend) => {
+        wrongResponses.push(await chai.request(app).delete('/friends').send(wrongFriend));
+      });
+    });
+
+    it('com o status code 400 - BAD REQUEST:', () => {
+      wrongResponses.forEach((wrongResponse) => {
+        expect(wrongResponse.status).to.be.equal(StatusCodes.BAD_REQUEST);
+      });
     });
   });
 });

@@ -4,6 +4,8 @@ export const searchId: string = '507f1f77bcf86cd799439011';
 
 export const inexistentId: string = '507f1f77bcf86cd799439012';
 
+export const malFormedId: string = '507f1f77bcf86cd79943901';
+
 export const allFriends: IFriend[] = [
   {
     _id: '507f1f77bcf86cd799439011',
@@ -31,11 +33,62 @@ export const newFriend: IFriend = {
   email: 'milaalmeidaaguiar@hotmail.com',
 };
 
+export const newWrongEmailFriend: IFriend = {
+  name: 'Milena Almeida',
+  email: 'milaalmeidaaguiarhotmail.com',
+};
+
+export const newWrongEmailFriend2: IFriend = {
+  name: 'Milena Almeida',
+  email: 'milaalmeidaaguiar@hotmailcom',
+};
+
+export const newWrongTypeName = {
+  name: 2,
+  email: 'milaalmeidaaguiar@hotmailcom',
+};
+
+export const newWrongTypeEmail = {
+  name: 'Milena Almeida',
+  email: 2,
+};
+
 export const createdFriend: IFriend = {
   _id: '00000020f51bb4362eee2a4d',
   name: 'Milena Almeida',
   email: 'milaalmeidaaguiar@hotmail.com',
   secretFriend: '',
+};
+
+export const wrongEmailFriend: IFriend = {
+  _id: '00000020f51bb4362eee2a4d',
+  name: 'Milena Almeida',
+  email: 'milaalmeidaaguiarhotmail.com',
+};
+
+export const wrongEmailFriend2: IFriend = {
+  _id: '00000020f51bb4362eee2a4d',
+  name: 'Milena Almeida',
+  email: 'milaalmeidaaguiar@hotmailcom',
+};
+
+export const wrongTypeName = {
+  _id: '00000020f51bb4362eee2a4d',
+  name: 2,
+  email: 'milaalmeidaaguiar@hotmailcom',
+};
+
+export const wrongTypeEmail = {
+  _id: '00000020f51bb4362eee2a4d',
+  name: 'Milena Almeida',
+  email: 2,
+};
+
+export const wrongSecretFriend: IFriend = {
+  _id: '00000020f51bb4362eee2a4d',
+  name: 'Milena Almeida',
+  email: 'milaalmeidaaguiarhotmail.com',
+  secretFriend: '507f1f77bcf86cd799439011',
 };
 
 export const updatedFriend: IFriend = {
