@@ -8,4 +8,5 @@ export default interface IRepository<T> {
   Create: (friend: T) => Promise<T>
   Update: (friend: T) => Promise<T | null>
   Delete: (friend: T) => Promise<T | null>
+  Clear: () => Promise<void>
 }

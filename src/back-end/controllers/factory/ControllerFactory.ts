@@ -13,6 +13,7 @@ export default abstract class ControllerFactory<T> implements IController<T> {
     this.Create = this.Create.bind(this);
     this.Update = this.Update.bind(this);
     this.Delete = this.Delete.bind(this);
+    this.ClearDB = this.ClearDB.bind(this);
   }
 
   async ReadAll(_req: Request, res: Response): Promise<void> {
@@ -56,5 +57,11 @@ export default abstract class ControllerFactory<T> implements IController<T> {
     }
 
     res.status(StatusCodes.OK).json(deletResponse as T);
+  }
+
+  async ClearDB(_req: Request, res: Response): Promise<void> {
+    await this._entityService.ClearAllInstances();
+
+    res.status(StatusCodes.NO_CONTENT).end();
   }
 }

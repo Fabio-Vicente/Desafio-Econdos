@@ -25,4 +25,7 @@ friendRoutes.route('/friends/:id')
     friendsController.ReadOne,
   );
 
+friendRoutes.route('/friends/all')
+  .delete(friendsController.ClearDB);
+
 export default friendRoutes;

@@ -38,4 +38,8 @@ MongoDBFactory<T extends { _id?: ObjectId | string }> implements IRepository<T> 
 
     return friend;
   }
+
+  async Clear(): Promise<void> {
+    void this.model.deleteMany();
+  }
 }

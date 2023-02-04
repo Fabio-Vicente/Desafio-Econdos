@@ -44,4 +44,8 @@ export default class EntityServiceFactory<T> implements IEntityService<T> {
 
     return changedInstance;
   }
+
+  async ClearAllInstances(): Promise<void> {
+    void this._repository.Clear();
+  }
 }

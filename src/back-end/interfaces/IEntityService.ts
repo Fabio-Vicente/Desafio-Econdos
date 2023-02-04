@@ -9,4 +9,5 @@ export default interface IEntityService<T> {
   CreateInstance: (newInstance: T) => Promise<T>
   UpdateInstance: (changedInstance: T) => Promise<T | ErrorCatalog>
   DeleteInstance: (removedInstance: T) => Promise<T | ErrorCatalog>
+  ClearAllInstances: () => Promise<void>
 }
