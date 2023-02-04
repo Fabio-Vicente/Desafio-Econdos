@@ -31,7 +31,7 @@ import {
   wrongSecretFriend,
   wrongTypeEmail,
   wrongTypeName,
-} from '../stubs/friends';
+} from '../stubs/friendsMock';
 
 const { app } = new App();
 
@@ -275,6 +275,23 @@ describe('Verifica se a aplicação responde como esperado quando:', () => {
       wrongResponses.forEach((wrongResponse) => {
         expect(wrongResponse.status).to.be.equal(StatusCodes.BAD_REQUEST);
       });
+    });
+  });
+
+  context('É requisitado a remoção de todos os amigos dados do banco', () => {
+    let getStub: SinonStub;
+
+    before(async () => {
+      getStub = stub(Model, 'deleteMany');
+      response = await chai.request(app).delete('/friends/all');
+    });
+
+    after(() => {
+      getStub.restore();
+    });
+
+    it('com o status code 204 - NO CONTENT:', () => {
+      expect(response.status).to.be.equal(StatusCodes.NO_CONTENT);
     });
   });
 });
