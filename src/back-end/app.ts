@@ -16,7 +16,7 @@ class App implements IApp {
 
   config(): void {
     this.app.use(express.json());
-    this.app.use(new AppRouter([friendsRoutes]).router);
+    this.app.use('/api/', new AppRouter([friendsRoutes]).router);
     this.app.use(ErrorMiddleware);
   }
 

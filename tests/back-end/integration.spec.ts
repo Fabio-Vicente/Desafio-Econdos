@@ -45,7 +45,7 @@ describe('Verifica se a aplicação responde como esperado quando:', () => {
 
     before(async () => {
       getStub = stub(Model, 'find').resolves(allFriends);
-      response = await chai.request(app).get('/friends');
+      response = await chai.request(app).get('/api/friends');
     });
 
     after(() => {
@@ -66,7 +66,7 @@ describe('Verifica se a aplicação responde como esperado quando:', () => {
 
     before(async () => {
       getStub = stub(Model, 'findOne').resolves(oneFriend);
-      response = await chai.request(app).get(`/friends/${searchId}`);
+      response = await chai.request(app).get(`/api/friends/${searchId}`);
     });
 
     after(() => {
@@ -87,7 +87,7 @@ describe('Verifica se a aplicação responde como esperado quando:', () => {
 
     before(async () => {
       getStub = stub(Model, 'findOne').resolves(null);
-      response = await chai.request(app).get(`/friends/${inexistentId}`);
+      response = await chai.request(app).get(`/api/friends/${inexistentId}`);
     });
 
     after(() => {
@@ -104,7 +104,7 @@ describe('Verifica se a aplicação responde como esperado quando:', () => {
 
     before(async () => {
       getStub = stub(Model, 'findOne').resolves(null);
-      response = await chai.request(app).get(`/friends/${malFormedId}`);
+      response = await chai.request(app).get(`/api/friends/${malFormedId}`);
     });
 
     after(() => {
@@ -121,7 +121,7 @@ describe('Verifica se a aplicação responde como esperado quando:', () => {
 
     before(async () => {
       createStube = stub(Model, 'create').resolves(createdFriend);
-      response = await chai.request(app).post('/friends').send(newFriend);
+      response = await chai.request(app).post('/api/friends').send(newFriend);
     });
 
     after(() => {
@@ -147,7 +147,7 @@ describe('Verifica se a aplicação responde como esperado quando:', () => {
         newWrongTypeName,
         newWrongTypeEmail,
       ].forEach(async (wrongFriend) => {
-        wrongResponses.push(await chai.request(app).post('/friends').send(wrongFriend));
+        wrongResponses.push(await chai.request(app).post('/api/friends').send(wrongFriend));
       });
     });
 
@@ -163,7 +163,7 @@ describe('Verifica se a aplicação responde como esperado quando:', () => {
 
     before(async () => {
       updateStub = stub(Model, 'updateOne').resolves(updateResponse as UpdateWriteOpResult);
-      response = await chai.request(app).put('/friends').send(updatedFriend);
+      response = await chai.request(app).put('/api/friends').send(updatedFriend);
     });
 
     after(() => {
@@ -184,7 +184,7 @@ describe('Verifica se a aplicação responde como esperado quando:', () => {
 
     before(async () => {
       updateStub = stub(Model, 'updateOne').resolves(notUpdateResponse as UpdateWriteOpResult);
-      response = await chai.request(app).put('/friends').send(inexistentFriend);
+      response = await chai.request(app).put('/api/friends').send(inexistentFriend);
     });
 
     after(() => {
@@ -207,7 +207,7 @@ describe('Verifica se a aplicação responde como esperado quando:', () => {
         wrongTypeEmail,
         wrongSecretFriend,
       ].forEach(async (wrongFriend) => {
-        wrongResponses.push(await chai.request(app).put('/friends').send(wrongFriend));
+        wrongResponses.push(await chai.request(app).put('/api/friends').send(wrongFriend));
       });
     });
 
@@ -223,7 +223,7 @@ describe('Verifica se a aplicação responde como esperado quando:', () => {
 
     before(async () => {
       deleteStub = stub(Model, 'deleteOne').resolves(deleteResponse as DeleteResult);
-      response = await chai.request(app).delete('/friends').send(oneFriend);
+      response = await chai.request(app).delete('/api/friends').send(oneFriend);
     });
 
     after(() => {
@@ -244,7 +244,7 @@ describe('Verifica se a aplicação responde como esperado quando:', () => {
 
     before(async () => {
       deleteStub = stub(Model, 'deleteOne').resolves(notDeleteResponse as DeleteResult);
-      response = await chai.request(app).delete('/friends').send(inexistentFriend);
+      response = await chai.request(app).delete('/api/friends').send(inexistentFriend);
     });
 
     after(() => {
@@ -267,7 +267,7 @@ describe('Verifica se a aplicação responde como esperado quando:', () => {
         wrongTypeEmail,
         wrongSecretFriend,
       ].forEach(async (wrongFriend) => {
-        wrongResponses.push(await chai.request(app).delete('/friends').send(wrongFriend));
+        wrongResponses.push(await chai.request(app).delete('/api/friends').send(wrongFriend));
       });
     });
 
@@ -283,7 +283,7 @@ describe('Verifica se a aplicação responde como esperado quando:', () => {
 
     before(async () => {
       deleteStub = stub(Model, 'deleteMany');
-      response = await chai.request(app).delete('/friends/all');
+      response = await chai.request(app).delete('/api/friends/all');
     });
 
     after(() => {
