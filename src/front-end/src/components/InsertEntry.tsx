@@ -12,6 +12,11 @@ export default function InsertEntry({ name, email, index }: InsertEntryProps): R
   const [currentFriend, setCurrentFriend] = useState<IFriend>({ name, email });
   const [isEditing, setIsEditing] = useState<boolean>(false);
 
+  const saveChanges = (): void => {
+    updateFriend(currentFriend, index);
+    setIsEditing(false);
+  };
+
   useEffect(() => {
     setCurrentFriend({ name: currentName, email: currentEmail });
   }, [currentName, currentEmail]);
@@ -49,7 +54,7 @@ export default function InsertEntry({ name, email, index }: InsertEntryProps): R
       {
         isEditing
           ? (
-            <button type="button" onClick={() => { updateFriend(currentFriend, index); }}>
+            <button type="button" onClick={() => { saveChanges(); }}>
               Ok
             </button>
           )

@@ -72,12 +72,17 @@ describe('Verifica se na página principal', () => {
 
     expect(updateButton).not.toBeInTheDocument();
     expect(confirmButton).toBeInTheDocument();
+    await userEvent.clear(editingLine[0].firstElementChild as Element);
+    await userEvent.clear(editingLine[0].firstElementChild as Element);
     await userEvent.type(editingLine[0].firstElementChild as Element, 'Milena Almeida');
     await userEvent.type(editingLine[1].firstElementChild as Element, 'milaalmeidaaguiar02@gmail.com');
     await userEvent.click(confirmButton);
 
     const updatedLine: HTMLCollection = screen.getAllByRole('row')[1].children;
 
+    expect(editingLine[0]).not.toBeInTheDocument();
+    expect(editingLine[1]).not.toBeInTheDocument();
+    expect(confirmButton).not.toBeInTheDocument();
     expect(updatedLine[0]).toHaveTextContent('Milena Almeida');
     expect(updatedLine[1]).toHaveTextContent('milaalmeidaaguiar02@gmail.com');
   });
@@ -98,7 +103,10 @@ describe('Verifica se na página principal', () => {
 
     await userEvent.click(deleteButton);
 
+    const tableLines = screen.getAllByRole('row');
+
     expect(newLine[0]).not.toBeInTheDocument();
     expect(newLine[1]).not.toBeInTheDocument();
+    expect(tableLines).toHaveLength(2);
   });
 });
