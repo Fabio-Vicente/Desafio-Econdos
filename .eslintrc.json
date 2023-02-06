@@ -20,7 +20,7 @@
     "plugins": [
         "react"
     ],
-    "ignorePatterns": ["**/dist/**/*", "**/build/**/*"],
+    "ignorePatterns": ["**/dist/**/*", "**/build/**/*", "react-app-env.d.ts", "reportWebVitals.ts"],
     "rules": {
         "no-underscore-dangle":"off"
     }
