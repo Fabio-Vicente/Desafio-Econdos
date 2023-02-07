@@ -139,7 +139,7 @@ describe('Verifica se na página principal', () => {
     expect(newLine[0]).not.toBeInTheDocument();
     expect(newLine[1]).not.toBeInTheDocument();
     expect(tableLines).toHaveLength(2);
-    expect(fetch).toHaveBeenCalledTimes(1);
+    expect(fetch).toHaveBeenCalledTimes(2);
     expect(fetch).toHaveBeenCalledWith({
       body: JSON.stringify(createdFriend),
       method: 'DELETE',
