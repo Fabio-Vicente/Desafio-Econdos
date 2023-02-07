@@ -1,4 +1,5 @@
 import express, { type Response } from 'express';
+import cors from 'cors';
 import { StatusCodes } from 'http-status-codes';
 import { type IApp } from './interfaces';
 import ErrorMiddleware from './middlewares/ErrorMiddleware';
@@ -15,6 +16,7 @@ class App implements IApp {
   }
 
   config(): void {
+    this.app.use(cors());
     this.app.use(express.json());
     this.app.use('/api/', new AppRouter([friendsRoutes]).router);
     this.app.use(ErrorMiddleware);
