@@ -3,9 +3,22 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { Home } from 'desafio-econdos-frontend/src/pages';
+import { createdFriend, newFriend } from '../../stubs/friendsMock';
 
 describe('Verifica se na página principal', () => {
+  let mockedFetch: jest.SpyInstance<Promise<Response>>;
+
+  before(() => { mockedFetch = jest.spyOn(global, 'fetch').mockImplementation(); });
+
+  afterEach(() => mockedFetch.mockClear());
+
   it('tem tabela para preenchimentos dos amigos', () => {
+    render(<Home />);
+
+    expect(screen.getByRole('table')).toBeInTheDocument();
+  });
+
+  it('tem um botão para sortear', () => {
     render(<Home />);
 
     expect(screen.getByRole('table')).toBeInTheDocument();
@@ -35,12 +48,12 @@ describe('Verifica se na página principal', () => {
     const tableLine: HTMLCollection = screen.getAllByRole('row')[1].children;
     const lineButton: Element = tableLine[2];
 
-    await userEvent.type(tableLine[0].firstElementChild as Element, 'Fábio Vicente');
+    await userEvent.type(tableLine[0].firstElementChild as Element, 'Milena Almeida');
     expect(lineButton).toBeDisabled();
-    await userEvent.type(tableLine[1].firstElementChild as Element, 'fab10_lima@hotmail.com');
+    await userEvent.type(tableLine[1].firstElementChild as Element, 'milaalmeidaaguiar02@gmail.com');
 
-    expect(tableLine[0].firstElementChild).toHaveValue('Fábio Vicente');
-    expect(tableLine[1].firstElementChild).toHaveValue('fab10_lima@hotmail.com');
+    expect(tableLine[0].firstElementChild).toHaveValue('Milena Almeida');
+    expect(tableLine[1].firstElementChild).toHaveValue('milaalmeidaaguiar02@gmail.com');
     expect(lineButton).not.toBeDisabled();
 
     await userEvent.click(lineButton);
@@ -48,18 +61,27 @@ describe('Verifica se na página principal', () => {
     const createdLine = tableLines[1].children;
 
     expect(tableLines).toHaveLength(3);
-    expect(createdLine[0]).toHaveTextContent('Fábio Vicente');
-    expect(createdLine[1]).toHaveTextContent('fab10_lima@hotmail.com');
+    expect(createdLine[0]).toHaveTextContent('Milena Almeida');
+    expect(createdLine[1]).toHaveTextContent('milaalmeidaaguiar02@gmail.com');
+    expect(fetch).toHaveBeenCalledTimes(1);
+    expect(fetch).toHaveBeenCalledWith({
+      body: JSON.stringify(newFriend),
+      method: 'POST',
+    });
   });
 
   it('é possível alterar um amigo da tabela', async () => {
+    before(() => {
+      mockedFetch.mockResolvedValueOnce(new Response(JSON.stringify(createdFriend)));
+    });
+
     render(<Home />);
 
     const tableLine: HTMLCollection = screen.getAllByRole('row')[1].children;
     const insertButton: Element = tableLine[2];
 
-    await userEvent.type(tableLine[0].firstElementChild as Element, 'Fábio Vicente');
-    await userEvent.type(tableLine[1].firstElementChild as Element, 'fab10_lima@hotmail.com');
+    await userEvent.type(tableLine[0].firstElementChild as Element, 'Milena Almeida');
+    await userEvent.type(tableLine[1].firstElementChild as Element, 'milaalmeidaaguiar02@gmail.com');
     await userEvent.click(insertButton);
 
     const newLine: HTMLCollection = screen.getAllByRole('row')[1].children;
@@ -74,8 +96,8 @@ describe('Verifica se na página principal', () => {
     expect(confirmButton).toBeInTheDocument();
     await userEvent.clear(editingLine[0].firstElementChild as Element);
     await userEvent.clear(editingLine[0].firstElementChild as Element);
-    await userEvent.type(editingLine[0].firstElementChild as Element, 'Milena Almeida');
-    await userEvent.type(editingLine[1].firstElementChild as Element, 'milaalmeidaaguiar02@gmail.com');
+    await userEvent.type(editingLine[0].firstElementChild as Element, 'Fábio Vicente');
+    await userEvent.type(editingLine[1].firstElementChild as Element, 'fab10_lima@hotmail.com');
     await userEvent.click(confirmButton);
 
     const updatedLine: HTMLCollection = screen.getAllByRole('row')[1].children;
@@ -85,16 +107,25 @@ describe('Verifica se na página principal', () => {
     expect(confirmButton).not.toBeInTheDocument();
     expect(updatedLine[0]).toHaveTextContent('Milena Almeida');
     expect(updatedLine[1]).toHaveTextContent('milaalmeidaaguiar02@gmail.com');
+    expect(fetch).toHaveBeenCalledTimes(2);
+    expect(fetch).toHaveBeenLastCalledWith({
+      body: JSON.stringify({ _id: createdFriend._id, name: 'Fábio Vicente', email: 'fab10_lima@hotmail.com' }),
+      method: 'PUT',
+    });
   });
 
   it('é possível remover um amigo da tabela', async () => {
+    before(() => {
+      mockedFetch.mockResolvedValueOnce(new Response(JSON.stringify(createdFriend)));
+    });
+
     render(<Home />);
 
     const tableLine: HTMLCollection = screen.getAllByRole('row')[1].children;
     const insertButton: Element = tableLine[2];
 
-    await userEvent.type(tableLine[0].firstElementChild as Element, 'Fábio Vicente');
-    await userEvent.type(tableLine[1].firstElementChild as Element, 'fab10_lima@hotmail.com');
+    await userEvent.type(tableLine[0].firstElementChild as Element, 'Milena Almeida');
+    await userEvent.type(tableLine[1].firstElementChild as Element, 'milaalmeidaaguiar02@gmail.com');
     await userEvent.click(insertButton);
 
     const newLine: HTMLCollection = screen.getAllByRole('row')[1].children;
@@ -108,5 +139,10 @@ describe('Verifica se na página principal', () => {
     expect(newLine[0]).not.toBeInTheDocument();
     expect(newLine[1]).not.toBeInTheDocument();
     expect(tableLines).toHaveLength(2);
+    expect(fetch).toHaveBeenCalledTimes(1);
+    expect(fetch).toHaveBeenCalledWith({
+      body: JSON.stringify(createdFriend),
+      method: 'DELETE',
+    });
   });
 });
