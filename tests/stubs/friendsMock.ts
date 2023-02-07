@@ -30,22 +30,22 @@ export const oneFriend: IFriend = {
 
 export const newFriend: IFriend = {
   name: 'Milena Almeida',
-  email: 'milaalmeidaaguiar@hotmail.com',
+  email: 'milaalmeidaaguiar02@gmail.com',
 };
 
 export const newWrongEmailFriend: IFriend = {
   name: 'Milena Almeida',
-  email: 'milaalmeidaaguiarhotmail.com',
+  email: 'milaalmeidaaguiar02gmail.com',
 };
 
 export const newWrongEmailFriend2: IFriend = {
   name: 'Milena Almeida',
-  email: 'milaalmeidaaguiar@hotmailcom',
+  email: 'milaalmeidaaguiar02@gmailcom',
 };
 
 export const newWrongTypeName = {
   name: 2,
-  email: 'milaalmeidaaguiar@hotmailcom',
+  email: 'milaalmeidaaguiar02@gmailcom',
 };
 
 export const newWrongTypeEmail = {
@@ -56,26 +56,26 @@ export const newWrongTypeEmail = {
 export const createdFriend: IFriend = {
   _id: '00000020f51bb4362eee2a4d',
   name: 'Milena Almeida',
-  email: 'milaalmeidaaguiar@hotmail.com',
+  email: 'milaalmeidaaguiar02@gmail.com',
   secretFriend: '',
 };
 
 export const wrongEmailFriend: IFriend = {
   _id: '00000020f51bb4362eee2a4d',
   name: 'Milena Almeida',
-  email: 'milaalmeidaaguiarhotmail.com',
+  email: 'milaalmeidaaguiar02gmail.com',
 };
 
 export const wrongEmailFriend2: IFriend = {
   _id: '00000020f51bb4362eee2a4d',
   name: 'Milena Almeida',
-  email: 'milaalmeidaaguiar@hotmailcom',
+  email: 'milaalmeidaaguiar02@gmailcom',
 };
 
 export const wrongTypeName = {
   _id: '00000020f51bb4362eee2a4d',
   name: 2,
-  email: 'milaalmeidaaguiar@hotmailcom',
+  email: 'milaalmeidaaguiar02@gmail.com',
 };
 
 export const wrongTypeEmail = {
@@ -87,7 +87,7 @@ export const wrongTypeEmail = {
 export const wrongSecretFriend: IFriend = {
   _id: '00000020f51bb4362eee2a4d',
   name: 'Milena Almeida',
-  email: 'milaalmeidaaguiarhotmail.com',
+  email: 'milaalmeidaaguiar02gmail.com',
   secretFriend: '507f1f77bcf86cd799439011',
 };
 
