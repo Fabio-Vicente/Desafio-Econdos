@@ -42,8 +42,8 @@ export const deleteFriend = async (friend: IFriend): Promise<IFriend> => {
   return response.json();
 };
 
-export const updateFriend = async (id: string, friend: IFriend): Promise<IFriend> => {
-  const response = await requestAPI('PUT', friend, id);
+export const updateFriendRegister = async (friend: IFriend): Promise<IFriend> => {
+  const response = await requestAPI('PUT', friend);
 
   if (response.status !== StatusCodes.OK) {
     throw new Error(response.statusText);
