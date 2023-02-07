@@ -12,7 +12,7 @@ const requestAPI = async (
     .then((response) => response)
 );
 
-export const requestFriends = async (): Promise<IFriend[]> => {
+export const requestFriendsRegister = async (): Promise<IFriend[]> => {
   const response = await requestAPI();
 
   if (response.status !== StatusCodes.OK) {
@@ -22,7 +22,7 @@ export const requestFriends = async (): Promise<IFriend[]> => {
   return response.json();
 };
 
-export const createFriend = async (friend: IFriend): Promise<IFriend> => {
+export const createFriendRegister = async (friend: IFriend): Promise<IFriend> => {
   const response = await requestAPI('POST', friend);
 
   if (response.status !== StatusCodes.CREATED) {
@@ -32,7 +32,7 @@ export const createFriend = async (friend: IFriend): Promise<IFriend> => {
   return response.json();
 };
 
-export const deleteFriend = async (friend: IFriend): Promise<IFriend> => {
+export const deleteFriendRegister = async (friend: IFriend): Promise<IFriend> => {
   const response = await requestAPI('DELETE', friend);
 
   if (response.status !== StatusCodes.OK) {
@@ -52,7 +52,7 @@ export const updateFriendRegister = async (friend: IFriend): Promise<IFriend> =>
   return response.json();
 };
 
-export const deleteAllFriends = async (): Promise<void> => {
+export const deleteAllFriendsRegister = async (): Promise<void> => {
   const response = await requestAPI('DELETE', null, '/all');
 
   if (response.status !== StatusCodes.NO_CONTENT) {
