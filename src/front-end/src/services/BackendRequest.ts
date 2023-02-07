@@ -5,10 +5,10 @@ const baseURL = process.env.REACT_APP_BACKEND_URL as string;
 
 const requestAPI = async (
   method: string = 'GET',
-  body: string | IFriend | null = null,
+  body: IFriend | null = null,
   route: string = '',
 ): Promise<Response> => (
-  fetch(`${baseURL}/${route}`, { method, body: JSON.stringify(body) })
+  fetch(`${baseURL}/${route}`, { method, body: JSON.stringify(body), headers: { 'Content-Type': 'application/json' } })
     .then((response) => response)
 );
 
